@@ -2,11 +2,11 @@
 #
 
 
-# 修改普通版本dts，适配 112M 大分区 (ubi 分区大小改为 0x7000000)，扩容ubi到0x7000000
-sed -i 's/0x4000000/0x7000000/g' target/linux/mediatek/dts/mt7981b-h3c-magic-nx30-pro.dts
+# 1. DTS：精准修改 UBI 分区 size 为 0x7000000 (112M)
+sed -i 's/reg = <0x3800000 0x[0-9a-fA-F]*>/reg = <0x3800000 0x7000000>/' target/linux/mediatek/dts/mt7981b-h3c-magic-nx30-pro.dts
 
-# 替换filogic.mk下的IMAGE_SIZE
-sed -i '/define Device\/h3c_magic-nx30-pro/,/endef/s/IMAGE_SIZE := .*/IMAGE_SIZE := 114688k/' target/linux/mediatek/image/filogic.mk
+# 2. 合并操作：限制在 NX30 Pro 区块内，精准修改 IMAGE_SIZE 并安全追加 UBIFS_OPTS 参数
+sed -i '/define Device\/h3c_magic-nx30-pro/,/endef/ s/IMAGE_SIZE := .*/IMAGE_SIZE := 114688k\n  UBIFS_OPTS := -m 2048 -e 126976 -c 8800/' target/linux/mediatek/image/filogic.mk
 
 
 # 修改默认LAN IP为192.168.5.1
@@ -39,3 +39,7 @@ rm -f /etc/uci-defaults/99-nikki-zashboard
 exit 0
 EOF
 chmod +x files/etc/uci-defaults/99-nikki-zashboard
+
+
+# 调试输出，看是否修改成功
+grep -A20 "h3c_magic-nx30-pro" target/linux/mediatek/image/filogic.mk
