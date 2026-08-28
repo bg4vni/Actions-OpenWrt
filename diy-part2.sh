@@ -20,25 +20,6 @@ uci commit luci
 EOF
 chmod +x package/base-files/files/etc/uci-defaults/99-set-theme
 
-# 预置 Zashboard(Nikki Web面板) 静态文件到固件
-mkdir -p files/usr/share/zashboard
-curl -sL "https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip" -o /tmp/ui.zip
-unzip -q /tmp/ui.zip -d /tmp/ui_temp
-cp -rf /tmp/ui_temp/zashboard-gh-pages/* files/usr/share/zashboard/
-rm -rf /tmp/ui.zip /tmp/ui_temp
-
-# ----关键改动：不覆盖整个配置文件，使用uci‑set方式追加参数----
-mkdir -p files/etc/config
-# 把uci指令打包进固件开机脚本，第一次开机自动设置dashboard_path
-mkdir -p files/etc/uci-defaults
-cat > files/etc/uci-defaults/99-nikki-zashboard <<'EOF'
-#!/bin/sh
-uci set nikki.main.dashboard_path='/usr/share/zashboard'
-uci commit nikki
-rm -f /etc/uci-defaults/99-nikki-zashboard
-exit 0
-EOF
-chmod +x files/etc/uci-defaults/99-nikki-zashboard
 
 
 # === 调试校验：打印修改后的 NX30 Pro 镜像打包参数 ===
