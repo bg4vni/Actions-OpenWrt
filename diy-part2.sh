@@ -21,8 +21,3 @@ EOF
 chmod +x package/base-files/files/etc/uci-defaults/99-set-theme
 
 
-
-# === 调试校验：打印修改后的 NX30 Pro 镜像打包参数 ===
-echo "================ NX30 Pro filogic.mk 校验 ================"
-grep -A15 "define Device/h3c_magic-nx30-pro" target/linux/mediatek/image/filogic.mk
-echo "=========================================================="
