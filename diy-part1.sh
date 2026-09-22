@@ -14,9 +14,9 @@ echo 'src-git passwall2 https://github.com/Openwrt-Passwall/openwrt-passwall2.gi
 #imm里面添加源：
 # 1. 将 SourceForge 上的三个文件夹依次添加至 OPKG 配置文件
 #cat << 'EOF' >> /etc/opkg/customfeeds.conf
-#src/gz passwall_packages https://sourceforge.net/projects/openwrt-passwall-build/files/releases/packages-24.10/aarch64_cortex-a72/passwall_packages/
-#src/gz passwall2 https://sourceforge.net/projects/openwrt-passwall-build/files/releases/packages-24.10/aarch64_cortex-a72/passwall2/
-#src/gz passwall_luci https://sourceforge.net/projects/openwrt-passwall-build/files/releases/packages-24.10/aarch64_cortex-a72/passwall_luci/
+#src/gz passwall_packages https://sourceforge.net/projects/openwrt-passwall-build/files/releases/packages-24.10/aarch64_cortex-a53/passwall_packages/
+#src/gz passwall2 https://sourceforge.net/projects/openwrt-passwall-build/files/releases/packages-24.10/aarch64_cortex-a53/passwall2/
+#src/gz passwall_luci https://sourceforge.net/projects/openwrt-passwall-build/files/releases/packages-24.10/aarch64_cortex-a53/passwall_luci/
 #EOF
 # 2. 关闭签名校验 (防止第三方源签名报错)
 #sed -i 's/option check_signature/# option check_signature/' /etc/opkg.conf
