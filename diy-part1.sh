@@ -10,6 +10,9 @@ echo 'src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main' >>
 echo 'src-git passwall_dep https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main' >> feeds.conf.default
 echo 'src-git passwall2 https://github.com/Openwrt-Passwall/openwrt-passwall2.git;main' >> feeds.conf.default
 
+# 3. 添加luci-adguardhome软件源
+echo 'src-git adguardhome https://github.com/kenzok8/openwrt-packages.git;main' >> feeds.conf.default
+
 
 #imm里面添加源：
 # 1. 将 SourceForge 上的三个文件夹依次添加至 OPKG 配置文件
